@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:campus_connect/constants/logic.dart';
 import 'package:campus_connect/screens/home_screen.dart';
 import 'package:campus_connect/screens/login_screen.dart';
@@ -66,6 +65,6 @@ class _MyAppState extends State<MyApp> {
           resetPasswordRoute: (context) => const ResetPasswordScreen(),
           drawerRoute: (context) => const DrawerWidget(),
         },
-        home: const LoginScreen());
+        home: const HomeScreen());
   }
 }
