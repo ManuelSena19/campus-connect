@@ -52,8 +52,13 @@ class _MyAppState extends State<MyApp> {
         ? loginRoute
         : homeScreenRoute,
         debugShowCheckedModeBanner: false,
-        themeMode: ThemeMode.dark,
+        themeMode: ThemeMode.system,
         theme: ThemeData(
+          primaryColor: Colors.blue,
+          brightness: Brightness.light
+        ),
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
           primaryColor: Colors.blue,
         ),
         routes: {
