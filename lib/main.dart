@@ -6,6 +6,7 @@ import 'package:campus_connect/screens/login_screen.dart';
 import 'package:campus_connect/screens/register_screen.dart';
 import 'package:campus_connect/screens/reset_password_screen.dart';
 import 'package:campus_connect/screens/verify_email_screen.dart';
+import 'package:campus_connect/utilities/drawer_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -63,6 +64,7 @@ class _MyAppState extends State<MyApp> {
           verifyEmailRoute: (context) => const VerifyEmailScreen(),
           logicRoute: (context) => const Logic(),
           resetPasswordRoute: (context) => const ResetPasswordScreen(),
+          drawerRoute: (context) => const DrawerWidget(),
         },
         home: const LoginScreen());
   }
