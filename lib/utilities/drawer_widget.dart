@@ -17,13 +17,25 @@ class DrawerWidget extends StatelessWidget {
 
     return Drawer(
       elevation: 0,
-      child: ListView(
-        padding: const EdgeInsets.fromLTRB(10, 50, 10, 10),
+      child: Column(
         children: [
-          const Center(
-            child: CircleAvatar(
-              backgroundImage: AssetImage("assets/logo.png"),
-              radius: 30,
+          Expanded(
+            flex: 2,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                CircleAvatar(
+                  backgroundImage: AssetImage("assets/logo.png"),
+                  radius: 45,
+                ),
+                SizedBox(height: 10,),
+                Text(
+                  "Campus Connect",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 20, color: Colors.blue),
+                ),
+              ],
             ),
           ),
           const Divider(
@@ -32,71 +44,100 @@ class DrawerWidget extends StatelessWidget {
             indent: 10,
             endIndent: 10,
           ),
-          ListTile(
-            title: const Text(
-              "Home",
-              style: TextStyle(fontSize: 15),
+          Expanded(
+            flex: 5,
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                ListTile(
+                  title: const Text(
+                    "Home",
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  onTap: () {
+                    pushRoute(homeScreenRoute);
+                  },
+                  leading: const Icon(
+                    Icons.home,
+                    color: Colors.blue,
+                  ),
+                ),
+                ListTile(
+                  title: const Text(
+                    'Settings',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  onTap: () {},
+                  leading: const Icon(
+                    Icons.settings,
+                    color: Colors.blue,
+                  ),
+                ),
+                ListTile(
+                  title: const Text(
+                    'Notifications',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  onTap: () {},
+                  leading: const Icon(
+                    Icons.notifications,
+                    color: Colors.blue,
+                  ),
+                ),
+                ListTile(
+                  title: const Text(
+                    'Help and Support',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  onTap: () {},
+                  leading: const Icon(
+                    Icons.help,
+                    color: Colors.blue,
+                  ),
+                ),
+                ListTile(
+                  title: const Text(
+                    'Feedback',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  onTap: () {},
+                  leading: const Icon(
+                    Icons.feedback_outlined,
+                    color: Colors.blue,
+                  ),
+                ),
+                ListTile(
+                  title: const Text(
+                    'Sign Out',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  onTap: () async {
+                    await FirebaseAuth.instance.signOut();
+                    pushReplacementRoute(loginRoute);
+                  },
+                  leading: const Icon(
+                    Icons.logout,
+                    color: Colors.blue,
+                  ),
+                ),
+                const Divider(
+                  height: 40,
+                  thickness: 3,
+                  indent: 10,
+                  endIndent: 10,
+                ),
+              ],
             ),
-            onTap: () {
-              pushRoute(homeScreenRoute);
-            },
-            leading: const Icon(Icons.home),
           ),
-          ListTile(
-            title: const Text(
-              'Settings',
-              style: TextStyle(fontSize: 15),
-            ),
-            onTap: () {},
-            leading: const Icon(Icons.settings),
-          ),
-          ListTile(
-            title: const Text(
-              'Notifications',
-              style: TextStyle(fontSize: 15),
-            ),
-            onTap: (){},
-            leading: const Icon(Icons.notifications),
-          ),
-          ListTile(
-            title: const Text(
-              'Help and Support',
-              style: TextStyle(fontSize: 15),
-            ),
-            onTap: (){},
-            leading: const Icon(Icons.help),
-          ),
-          ListTile(
-            title: const Text(
-              'Feedback',
-              style: TextStyle(fontSize: 15),
-            ),
-            onTap: (){},
-            leading: const Icon(Icons.feedback_outlined),
-          ),
-          ListTile(
-            title: const Text(
-              'Sign Out',
-              style: TextStyle(fontSize: 15),
-            ),
-            onTap: () async {
-              await FirebaseAuth.instance.signOut();
-              pushReplacementRoute(loginRoute);
-            },
-            leading: const Icon(Icons.logout),
-          ),
-          const Divider(
-            height: 40,
-            thickness: 3,
-            indent: 10,
-            endIndent: 10,
-          ),
-          const SizedBox(height: 250,),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text(
-              'Advertise your Business',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          Flexible(
+            child: ElevatedButton(
+              onPressed: () {
+                pushRoute(createAdRoute);
+              },
+              child: const Text(
+                'Advertise your Business',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
           ),
         ],
