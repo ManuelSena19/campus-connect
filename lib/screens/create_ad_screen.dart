@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class CreateAdScreen extends StatefulWidget {
   const CreateAdScreen({Key? key}) : super(key: key);
@@ -26,12 +27,25 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
   final _firestore = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser;
   late XFile _image;
+  late String _url;
 
   Future<void> _pickImage() async {
     _image = (await ImagePicker().pickImage(source: ImageSource.gallery))!;
-      setState(() {
-        _imageFile = File(_image.path);
-      });
+    setState(() {
+      _imageFile = File(_image.path);
+    });
+  }
+
+  Future<void> uploadImageToFirebase(File imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+
+    final Reference storageReference =
+        FirebaseStorage.instance.ref().child('images/$fileName');
+    final UploadTask uploadTask = storageReference.putFile(imageFile);
+    final String downloadURL = await (await uploadTask).ref.getDownloadURL();
+    setState(() {
+      _url = downloadURL;
+    });
   }
 
   Future<void> addAd(
@@ -43,9 +57,8 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
       String vendorLocation) async {
     final CollectionReference ads = _firestore.collection('ads');
     if (_imageFile != null) {
-      final url = _image.path;
-      await ads.doc(productName).set({
-        'imagePath': url,
+      await ads.doc(vendorName).set({
+        'imagePath': _url,
         'phoneNumber': phoneNumber,
         'productCategory': productCategory,
         'productDetails': productDetails,
@@ -54,11 +67,14 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
         'vendorLocation': vendorLocation,
         'vendorName': vendorName,
       });
+      await _firestore.collection('images').doc(vendorName).set({
+        'imagePath': _url,
+        'vendorName': vendorName
+      });
     } else {
       showErrorDialog(context, 'Please select an image');
     }
   }
-
 
   void pushReplacementRoute(String route) {
     Navigator.pushReplacementNamed(context, route);
@@ -260,6 +276,7 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                       String productName = productNameController.text;
                       String vendorLocation = locationValue!;
                       String vendorName = vendorNameController.text;
+                      await uploadImageToFirebase(_imageFile!);
                       await addAd(productName, vendorName, phoneNumber,
                           productDetails, productCategory, vendorLocation);
                       pushReplacementRoute(homeScreenRoute);
