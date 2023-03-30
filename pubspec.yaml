@@ -21,6 +21,8 @@ dependencies:
   path_provider: ^2.0.14
   firebase_storage: ^11.0.16
   path: ^1.8.2
+  url_launcher: ^6.1.10
+  flutter_email_sender: ^5.2.0
 
 dev_dependencies:
   flutter_test:

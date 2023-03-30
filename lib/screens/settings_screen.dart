@@ -1,8 +1,6 @@
 import 'package:campus_connect/utilities/search_bar_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../utilities/divider_widget.dart';
-
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
 

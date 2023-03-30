@@ -7,3 +7,4 @@ const logicRoute = '/logic/';
 const drawerRoute = '/drawer/';
 const createAdRoute = '/create-ad-screen/';
 const settingsRoute = '/settings-screen/';
+const feedbackRoute = '/settings-screen/';

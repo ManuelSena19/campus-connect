@@ -2,12 +2,44 @@ import 'package:campus_connect/utilities/divider_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:campus_connect/constants/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class DrawerWidget extends StatelessWidget {
+class DrawerWidget extends StatefulWidget {
   const DrawerWidget({Key? key}) : super(key: key);
 
   @override
+  State<DrawerWidget> createState() => _DrawerWidgetState();
+}
+
+class _DrawerWidgetState extends State<DrawerWidget> {
+  final Uri _emailLaunchUri = Uri(
+      scheme: 'mailto',
+      path: 'emmanueldokeii@gmail.com',
+      queryParameters: {
+        'subject': 'Campus Connect Support',
+      }
+  );
+
+  void initUri() async{
+    await canLaunchUrl(_emailLaunchUri);
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    initUri();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    void sendMail() async {
+      if (await canLaunchUrl(_emailLaunchUri)) {
+        await launchUrl(_emailLaunchUri);
+      } else {
+        throw 'Could not launch $_emailLaunchUri';
+      }
+    }
+
     void pushRoute(String route) {
       Navigator.pushNamed(context, route);
     }
@@ -87,7 +119,9 @@ class DrawerWidget extends StatelessWidget {
                     'Help and Support',
                     style: TextStyle(fontSize: 15),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    sendMail();
+                  },
                   leading: const Icon(
                     Icons.help,
                     color: Colors.blue,
@@ -98,7 +132,9 @@ class DrawerWidget extends StatelessWidget {
                     'Feedback',
                     style: TextStyle(fontSize: 15),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    pushRoute(feedbackRoute);
+                  },
                   leading: const Icon(
                     Icons.feedback_outlined,
                     color: Colors.blue,
