@@ -1,3 +1,4 @@
+import 'package:campus_connect/utilities/divider_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:campus_connect/constants/routes.dart';
 import 'package:flutter/material.dart';
@@ -38,12 +39,7 @@ class DrawerWidget extends StatelessWidget {
               ],
             ),
           ),
-          const Divider(
-            height: 40,
-            thickness: 3,
-            indent: 10,
-            endIndent: 10,
-          ),
+          dividerWidget(),
           Expanded(
             flex: 5,
             child: ListView(
@@ -67,7 +63,9 @@ class DrawerWidget extends StatelessWidget {
                     'Settings',
                     style: TextStyle(fontSize: 15),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    pushRoute(settingsRoute);
+                  },
                   leading: const Icon(
                     Icons.settings,
                     color: Colors.blue,
