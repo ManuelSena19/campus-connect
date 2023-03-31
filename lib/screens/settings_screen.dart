@@ -1,3 +1,4 @@
+import 'package:campus_connect/constants/routes.dart';
 import 'package:campus_connect/utilities/search_bar_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -9,13 +10,17 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  void pushNamed(String route){
+    Navigator.pushNamed(context, route);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: searchBarWidget("Search Settings"),
         centerTitle: true,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.blue,
       ),
       body: ListView(
         scrollDirection: Axis.vertical,
@@ -29,14 +34,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
               color: Colors.blue,
             ),
             title: const Text(
-              "Your App",
+              "Your Account",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             subtitle: const Text(
               "Manage and see information about your account.",
               style: TextStyle(color: Colors.grey),
             ),
-            onTap: (){},
+            onTap: (){
+              pushNamed(accountSettingsRoute);
+            },
           ),
           const SizedBox(
             height: 20,

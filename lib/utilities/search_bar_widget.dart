@@ -7,7 +7,7 @@ Widget searchBarWidget(String labelText) {
           width: 300,
           height: 40,
           decoration: BoxDecoration(
-            color: Colors.white10,
+            color: Colors.blueGrey,
             borderRadius: BorderRadius.circular(50),
           ),
           child: Row(
