@@ -10,3 +10,4 @@ const settingsRoute = '/settings-screen/';
 const feedbackRoute = '/feedback-screen/';
 const accountSettingsRoute = 'account-settings';
 const accountInfoRoute = '/account-info/';
+const categoryRoute = '/category-screen/';

@@ -39,49 +39,50 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Padding(
                       padding: const EdgeInsets.all(0),
                       child: ListView(
+                        physics: const BouncingScrollPhysics(),
                         scrollDirection: Axis.vertical,
                         children: [
-                          category(() => null, "Food", Icons.fastfood),
+                          category(context, "Food", Icons.fastfood),
                           const SizedBox(
                             height: 10,
                           ),
                           dividerWidget(),
                           category(
-                              () => null, "Books and Stationery", Icons.school),
+                              context, "Books and Stationery", Icons.school),
                           const SizedBox(
                             height: 10,
                           ),
                           dividerWidget(),
-                          category(() => null, "Clothes and Accessories",
+                          category(context, "Clothes and Accessories",
                               Icons.local_mall),
                           const SizedBox(
                             height: 10,
                           ),
                           dividerWidget(),
-                          category(() => null, "Cosmetics", MdiIcons.lotion),
+                          category(context, "Cosmetics", MdiIcons.lotion),
                           const SizedBox(
                             height: 10,
                           ),
                           dividerWidget(),
-                          category(() => null, "Phones and Accessories",
+                          category(context, "Phones and Accessories",
                               Icons.phone_android),
                           const SizedBox(
                             height: 10,
                           ),
                           dividerWidget(),
-                          category(() => null, "Computers and Accessories",
+                          category(context, "Computers and Accessories",
                               Icons.computer),
                           const SizedBox(
                             height: 10,
                           ),
                           dividerWidget(),
-                          category(() => null, "Services",
+                          category(context, "Services",
                               Icons.miscellaneous_services),
                           const SizedBox(
                             height: 10,
                           ),
                           dividerWidget(),
-                          category(() => null, "Drugs and Medical Products",
+                          category(context, "Drugs and Medical Products",
                               MdiIcons.pill),
                           const SizedBox(
                             height: 10,
@@ -92,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   }
                   return const Text(
-                    "You don't any ads yet",
+                    "You don't have any ads yet",
                   );
                 },
               ),
